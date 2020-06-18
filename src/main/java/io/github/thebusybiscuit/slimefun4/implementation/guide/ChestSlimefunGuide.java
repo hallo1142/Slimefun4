@@ -519,12 +519,16 @@ public class ChestSlimefunGuide implements SlimefunGuideImplementation {
             menu.addItem(i, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
         }
 
-        // Settings Panel
-        menu.addItem(1, ChestMenuUtils.getMenuButton(p));
-        menu.addMenuClickHandler(1, (pl, slot, item, action) -> {
-            SlimefunGuideSettings.openSettings(pl, pl.getInventory().getItemInMainHand());
-            return false;
-        });
+        if (p.hasPermission("slimefun.admin")) {
+            // Settings Panel
+            menu.addItem(1, ChestMenuUtils.getMenuButton(p));
+            menu.addMenuClickHandler(1, (pl, slot, item, action) -> {
+                SlimefunGuideSettings.openSettings(pl, pl.getInventory().getItemInMainHand());
+                return false;
+            });
+        } else {
+            menu.addItem(1, ChestMenuUtils.getBackground(), ChestMenuUtils.getEmptyClickHandler());
+        }
 
         // Search feature!
         menu.addItem(7, ChestMenuUtils.getSearchButton(p));
